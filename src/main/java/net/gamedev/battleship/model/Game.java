@@ -6,6 +6,7 @@ public class Game {
     private Player player2;
     private GameStatus status = GameStatus.INCOMPLETE;
     private boolean player1turn = true;
+    private GameResult result = GameResult.NOT_FINISHED;
 
     public Game(Player player1) {
         this.player1 = player1;
@@ -69,6 +70,11 @@ public class Game {
                 await.setPlayerFieldCell(addr, CellStatus.HIT);
                 if (!await.hasMoreShips()){
                     status = GameStatus.FINISHED;
+                    if(player1turn){
+                        this.result = GameResult.PLAYER1_WON;
+                    }else{
+                        this.result = GameResult.PLAYER2_WON;
+                    }
                 }
                 break;
             case EMPTY:
@@ -81,5 +87,18 @@ public class Game {
                 player1turn = !player1turn;
                 break;
         }
+    }
+    public boolean isWinner(Player player){
+        if((result == GameResult.PLAYER1_WON || result == GameResult.PLAYER2_SURRENDERED) && player == player1) {
+            return true;
+        }else if((result == GameResult.PLAYER2_WON || result == GameResult.PLAYER1_SURRENDERED) && player == player2){
+            return true;
+        }
+        return false;
+    }
+
+     void surrender(Player player) {
+        status = GameStatus.FINISHED;
+        result = player == player1 ? GameResult.PLAYER1_SURRENDERED : GameResult.PLAYER2_SURRENDERED;
     }
 }

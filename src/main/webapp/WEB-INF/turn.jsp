@@ -2,12 +2,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link href="${pageContext.request.contextPath}/main.css" rel="stylesheet">
+
     <title>Battleship - turn</title>
 </head>
 <body>
 <form method="post">
     <h1>${player.name} select cell to fire</h1>
-    <table>
+    <table class="field">
         <tr>
             <td></td>
             <c:forEach items="A,B,C,D,E,F,G,H,I,J" var="col">

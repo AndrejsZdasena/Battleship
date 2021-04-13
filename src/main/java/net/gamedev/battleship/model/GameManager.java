@@ -20,4 +20,11 @@ public class GameManager {
         }
         return result;
     }
+
+    public synchronized void surrender(Game game, Player player) {
+        if (game.getStatus() == GameStatus.FINISHED){
+            return;
+        }
+        game.surrender(player);
+    }
 }

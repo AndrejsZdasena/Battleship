@@ -26,35 +26,36 @@ public class PlacementServlet extends HttpServlet {
         var game = (Game) req.getSession().getAttribute(Game.ATTR);
         player.getPlayerField().clear();
         var addresses = req.getParameterValues("addr");
-        if (addresses==null){
-            req.setAttribute("incorrectShipPlacement", true);
+        if (addresses == null) {
+            req.setAttribute("incorrectShipsPlacement", true);
             openPlacement(req, resp);
             return;
         }
         var shipAddresses = Set.of(addresses);
         player.setShips(shipAddresses);
-        if (player.isPlayerFieldValid()){
-            req.setAttribute("incorrectShipPlacement", true);
+        if (!player.isPlayerFieldValid()) {
+            req.setAttribute("incorrectShipsPlacement", true);
             openPlacement(req, resp);
             return;
         }
-
         game.checkGameStart();
-        openNext(req,resp);
+        openNext(req, resp);
     }
 
     private void openNext(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        var player = (Player)request.getSession().getAttribute(Player.ATTR);
         var game = (Game) request.getSession().getAttribute(Game.ATTR);
-        var opponent = game.opponentOf(player);
-        if (game.getStatus() == GameStatus.IN_PROGRESS){
+        var player = (Player) request.getSession().getAttribute(Player.ATTR);
+       var opponent = game.opponentOf(player);
+        //game.checkGameStart();
+        if (game.getStatus() == GameStatus.IN_PROGRESS) {
             openTurn(request, response);
-        }else if (!player.isPlayerFieldValid()){
+        } else if (!player.isPlayerFieldValid()) {
             openPlacement(request, response);
-        }else{
-            openPlacementAwait(request,response);
+        } else {
+            openPlacementAwait(request, response);
         }
     }
+
 
     private void openTurn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.sendRedirect("turn");

@@ -39,7 +39,7 @@ public class Player {
         for (var addr : addresses) {
             playerField.put(addr, CellStatus.SHIP);
         }
-        playerFieldValid = playerField.size() == 3;
+        playerFieldValid = playerField.size() >= 3;
     }
     public void setPlayerFieldCell(String addr, CellStatus status){
         playerField.put(addr, status);

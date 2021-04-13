@@ -20,6 +20,32 @@
         background-position: center;
         background-size: cover;
     }
+    table.field td {
+        display: inline-block;
+        border-collapse: collapse;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    table.field td {
+        border: 1px solid black;
+        width: 2em;
+        height: 2em;
+        text-align: center;
+    }
+
+    table.field td.SHIP {
+        background-color: black;
+    }
+
+    table.field td.HIT {
+        background-color: red;
+    }
+
+    table.field td.MISS {
+        background-color: aqua;
+    }
+
 </style>
 <body>
 
@@ -32,6 +58,7 @@
         <hr class="w3-border-grey" style="margin:auto;width:40%">
         <p class="w3-large w3-center">BATTLESHIP</p>
         <p class="w3-large w3-center"><a href="registration" class="w3-btn w3-black">Start game</a></p>
+        <p class="w3-large w3-center"><a href="database" class="w3-btn w3-black">Score</a></p>
     </div>
     <div class="w3-display-bottomleft w3-padding-large">
         Powered by Andrew

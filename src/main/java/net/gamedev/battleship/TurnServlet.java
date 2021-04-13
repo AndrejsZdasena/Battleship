@@ -38,14 +38,13 @@ public class TurnServlet extends HttpServlet {
 
         var game = (Game) req.getSession().getAttribute(Game.ATTR);
         var player = (Player) req.getSession().getAttribute(Player.ATTR);
-        if (game.getStatus() == GameStatus.FINISHED) {
+        if (game.getStatus() != GameStatus.IN_PROGRESS) {
             openFinish(req, resp);
         } else if (game.getCurrentPlayer() == player) {
             openTurn(req, resp);
         } else {
             openTurnAwait(req, resp);
         }
-
     }
 
     private void openTurn(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
